@@ -1,0 +1,167 @@
+{
+  "easycom": {
+    "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+  },
+  "pages": [
+    // 消息列表
+    {
+      "path": "pages/chatList/chatList",
+      "style": {
+        "app-plus": {
+          "titleNView": {
+            "titleText": "消息",
+            "titleSize": "30rpx",
+            "titleAlign": "left",
+            "buttons": [{
+                "type": "none",
+                "fontSrc": "static/icon/fonts/icomoon.ttf",
+                "text": "\ue909",
+                "width": "100rpx",
+                "fontSize": "35rpx",
+                "types": "more"
+              },
+              {
+                "type": "none",
+                "fontSrc": "static/icon/fonts/icomoon.ttf",
+                "text": "\uf002",
+                "width": "100rpx",
+                "fontSize": "35rpx",
+                "types": "search"
+              }
+            ],
+            "autoBackButton": false
+          }
+        }
+      }
+    },
+    // 聊天页面
+    {
+      "path": "pages/chatDetail/chatDetail",
+      "style": {
+        "app-plus": {
+          "titleNView": {
+            "titleText": "用户名",
+            "titleSize": "30rpx",
+            "titleAlign": "left",
+            "buttons": [{
+                "type": "none",
+                "text": "...",
+                "width": "100rpx",
+                "fontSize": "35rpx",
+                "types": "detail"
+              }
+            ]
+          }
+        }
+      }
+    },
+    // 登录
+    {
+      "path": "pages/login/login",
+      "style": {}
+    },
+    // 注册
+    {
+      "path": "pages/register/register",
+      "style": {}
+    },
+    {
+      "path": "pages/getBackPwd/getBackPwd",
+      "style": {}
+    },
+    {
+      "path": "pages/my/my",
+      "style": {
+        "app-plus": {
+          "titleNView": {
+            "titleSize": "30rpx",
+            "titleAlign": "left",
+            "buttons": [{
+                "type": "none",
+                "fontSrc": "static/icon/fonts/icomoon.ttf",
+                "text": "\ue909",
+                "width": "100rpx",
+                "fontSize": "35rpx",
+                "types": "more"
+              },
+              {
+                "type": "none",
+                "fontSrc": "static/icon/fonts/icomoon.ttf",
+                "text": "\uf002",
+                "width": "100rpx",
+                "fontSize": "35rpx",
+                "types": "search"
+              }
+            ],
+            "autoBackButton": false
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/friendList/friendList",
+      "style": {
+        "app-plus": {
+          "titleNView": {
+            "titleText": "通讯录",
+            "titleSize": "30rpx",
+            "titleAlign": "left",
+            "buttons": [{
+                "type": "none",
+                "fontSrc": "static/icon/fonts/icomoon.ttf",
+                "text": "\ue909",
+                "width": "100rpx",
+                "fontSize": "35rpx",
+                "types": "more"
+              },
+              {
+                "type": "none",
+                "fontSrc": "static/icon/fonts/icomoon.ttf",
+                "text": "\uf002",
+                "width": "100rpx",
+                "fontSize": "35rpx",
+                "types": "search"
+              }
+            ],
+            "autoBackButton": false
+          }
+        }
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "app-plus": {
+      "softinputMode": "adjustResize"
+    }
+  },
+  "tabBar": {
+    "color": "#909399",
+    "selectedColor": "#303133",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      // 消息
+      {
+        "pagePath": "pages/chatList/chatList",
+        "iconPath": "static/index.png",
+        "selectedIconPath": "static/index-selected.png",
+        "text": "消息"
+      },
+      // 通讯录
+      {
+        "pagePath": "pages/friendList/friendList",
+        "iconPath": "static/index.png",
+        "selectedIconPath": "static/index-selected.png",
+        "text": "通讯录"
+      },
+      // 我的
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/center.png",
+        "selectedIconPath": "static/center-selected.png",
+        "text": "我"
+      }
+    ]
+  }
+}
