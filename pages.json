@@ -36,7 +36,7 @@
     },
     // 聊天页面
     {
-      "path": "pages/chatDetail/chatDetail",
+      "path": "pages/chatRoom/chatRoom",
       "style": {
         "app-plus": {
           "titleNView": {

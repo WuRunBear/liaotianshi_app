@@ -34,7 +34,7 @@ export default {
         {
           text: '发起群聊',
           to: {
-            path: '/pages/chatDetail/chatDetail'
+            path: ''
           }
         },
         {

@@ -4,7 +4,7 @@
       @touchstart="chat_item_back_show"
       @touchcancel="chat_item_back_hidden"
       @touchend="chat_item_back_hidden"
-      @click='toBVue({path: "/pages/chatDetail/chatDetail?room_id=123456"})'
+      @click='toBVue({path: "/pages/chatRoom/chatRoom?room_id=123456"})'
       :class="{ chat_item_back }"
       class="chat_item"
       v-if="info"
