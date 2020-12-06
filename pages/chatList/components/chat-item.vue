@@ -4,13 +4,18 @@
       @touchstart="chat_item_back_show"
       @touchcancel="chat_item_back_hidden"
       @touchend="chat_item_back_hidden"
-      @click='toBVue({path: "/pages/chatRoom/chatRoom?room_id=123456"})'
+      @click="toBVue({ path: '/pages/chatRoom/chatRoom?room_id=123456' })"
       :class="{ chat_item_back }"
       class="chat_item"
       v-if="info"
     >
       <view class="left">
-        <u-image class="picture" width="96rpx" height="96rpx" :src="info.picture"></u-image>
+        <u-image
+          class="picture"
+          width="96rpx"
+          height="96rpx"
+          :src="info.picture"
+        ></u-image>
       </view>
 
       <view class="right">
@@ -35,28 +40,37 @@ export default {
   props: {
     data: {
       type: Object,
-      default: () => null
-    }
+      default: () => null,
+    },
   },
-  name: 'chat-item',
+  name: "chat-item",
   data() {
     return {
       info: this.data,
-      chat_item_back: false
+      chat_item_back: false,
     };
   },
   methods: {
-    chat_item_back_show(){
+    /**
+     * 被按下时背景颜色显示
+     */
+    chat_item_back_show() {
       this.chat_item_back = true;
     },
-    chat_item_back_hidden(){
+    /**
+     * 放开时背景颜色隐藏
+     */
+    chat_item_back_hidden() {
       this.chat_item_back = false;
     },
-    toBVue(to){
+    /**
+     * 跳转
+     */
+    toBVue(to) {
       uni.navigateTo({
-        url: to.path
+        url: to.path,
       });
-    }
+    },
   },
   filters: {
     /**
@@ -70,7 +84,7 @@ export default {
 
       // 如果不在同一年  返回格式：yyyy年MM月dd日 HH:mm:ss
       if (chatTime.getFullYear() < nowTime.getFullYear()) {
-        return chatTime.format('yyyy年MM月dd日 HH:mm:ss');
+        return chatTime.format("yyyy年MM月dd日 HH:mm:ss");
       }
 
       // 如果在同一年
@@ -78,26 +92,26 @@ export default {
         // 如果在同一个月  否则返回格式：MM月dd日
         if (chatTime.getMonth() == nowTime.getMonth()) {
           if (chatTime.getDate() == nowTime.getDate() - 1) {
-            return '昨天';
+            return "昨天";
           }
 
           // 如果在同一星期
           if (chatTime.getIsSameWeek(nowTime)) {
             // 如果在同一天
             if (chatTime.getDay() == nowTime.getDay()) {
-              return chatTime.format('HH:mm');
+              return chatTime.format("HH:mm");
             } else {
-              return chatTime.format('EE HH:mm');
+              return chatTime.format("EE HH:mm");
             }
           } else {
-            return chatTime.format('MM月dd日');
+            return chatTime.format("MM月dd日");
           }
         } else {
-          return chatTime.format('MM月dd日');
+          return chatTime.format("MM月dd日");
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
