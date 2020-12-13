@@ -1,7 +1,7 @@
 <template>
   <view>
     <view
-      :class="{ 
+      :class="{
         isMe: user.number == msg.master.number
       }"
       class="message"
@@ -13,14 +13,56 @@
       <view class="right">
         <view class="user_name">{{ msg.master.userName }}</view>
 
-        <view class="user_message">{{ msg.text }}</view>
+        <!-- 文字 -->
+        <view @click="msgClick(msg.message, msg.type)" class="user_message" v-if="msg.type == 0">
+          {{ msg.message }}
+        </view>
+        <!-- 语音 -->
+        <view
+          @click="msgClick(msg.message, msg.type)"
+          class="user_message user_voice"
+          v-else-if="msg.type == 1"
+        >
+          <!-- 未播放 -->
+          <u-icon name="volume" size="40" v-show="!voicePlaying" />
+          <!-- 播放中 -->
+          <u-icon name="volume-fill" size="40" v-show="voicePlaying" />
+          <!-- 时间 -->
+          <view class="user_voice_time">{{ msg.message.size }}"</view>
+        </view>
+        <!-- 图片 -->
+        <view
+          @click="msgClick(msg.message, msg.type)"
+          class="user_message"
+          v-else-if="msg.type == 2"
+        >
+          {{ msg.message }}
+        </view>
+        <!-- 视频 -->
+        <view
+          @click="msgClick(msg.message, msg.type)"
+          class="user_message"
+          v-else-if="msg.type == 3"
+        >
+          {{ msg.message }}
+        </view>
+        <!-- 文件 -->
+        <!-- <view
+          @click="msgClick(msg.message, msg.type)"
+          class="user_message"
+          v-if="msg.type == 4"
+        >
+          {{ msg.message }}
+        </view> -->
       </view>
     </view>
   </view>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex';
 export default {
+  name: 'message-item',
   props: {
     msg: {
       type: Object,
@@ -35,8 +77,83 @@ export default {
         number: 1234567891,
         userName: '测试用户自己',
         picture: ''
-      }
+      },
+      voicePlaying: false,
     };
+  },
+  computed: {
+    // ...mapGetters({
+    //   playing_audio: 'chatRoom/playing_audio'
+    // })
+    ...mapState({
+      playing_audio: state => state.chatRoom.playing_audi,
+    })
+  },
+  created() {
+    // this.init();
+  },
+  methods: {
+    msgClick(obj, type) {
+      if (type == 0) { // 文字
+        console.log(type, obj);
+      } else if (type == 1) { // 语音
+        // 播放语音
+        this.toggleVoicePlay();
+        // console.log(type, obj);
+      } else if (type == 2) { // 图片
+        console.log(type, obj);
+      } else if (type == 3) { // 视频
+        console.log(type, obj);
+      } else if (type == 4) { // 文件
+        console.log(type, obj);
+      }
+    },
+    /**
+     * 初始化
+     */
+    init(){
+      if(this.msg.type == 1){
+        
+      }
+    },
+    createAudio(){
+      this.audio = this.createInnerAudioContext({
+        src: this.msg.message.url,
+        onPlay: ()=>{
+          this.voicePlaying = true;
+        },
+        onStop: ()=>{ // 停止播放 更改状态并销毁实列
+          this.voicePlaying = false;
+          this.audio.destroy();
+          this.audio = null;
+      console.log(this.audio)
+        },
+        onEnded: ()=>{ // 播放完毕 更改状态并销毁实列
+          this.voicePlaying = false;
+          this.audio.destroy();
+          this.audio = null;
+        }
+      });
+    },
+    /**
+     * 播放语音
+     */
+    toggleVoicePlay() {
+      if(!this.audio){
+        this.createAudio();
+      }
+
+      if(this.voicePlaying){ // 如果正在播放中
+        this.audio.stop(); // 停止播放
+      }else{ // 不在播放中
+        if(this.playing_audio && this.playing_audio !== this.audio){ // 如果正在播放其他语音
+          this.playing_audio.stop(); // 停止
+        }
+        this.$store.commit('chatRoom/setPlaying_audio', this.audio) // 更改正在播放的语音
+        this.audio.play(); // 开始播放
+      }
+      console.log(this.audio)
+    }
   },
 };
 </script>
@@ -67,6 +184,15 @@ export default {
       word-wrap: break-word;
       word-break: break-all;
     }
+    .user_voice {
+      width: 250rpx;
+      display: flex;
+      align-items: center;
+
+      &_time {
+        margin-left: 20rpx;
+      }
+    }
   }
 }
 .isMe {
@@ -76,7 +202,7 @@ export default {
       text-align: right;
     }
     .user_message {
-      background-color: #19BE6B;
+      background-color: #19be6b;
     }
   }
 }

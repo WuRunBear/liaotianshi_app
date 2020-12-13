@@ -11,6 +11,26 @@ import uView from 'uview-ui'
 Vue.use(uView);
 
 /**
+ * 创建audio对象
+ * @param {Object} conf audio参数
+ */
+Vue.prototype.createInnerAudioContext = function(conf){
+  let innerAudioContext = uni.createInnerAudioContext();
+
+  for (const key in conf) {
+    if (conf.hasOwnProperty(key)) {
+      if('function' == typeof innerAudioContext[key]) {
+        innerAudioContext[key](conf[key]);
+      }else{
+        innerAudioContext[key] = conf[key];
+      }
+    }
+  }
+
+  return innerAudioContext;
+}
+
+/**
  * 对Date的扩展，将 Date 转化为指定格式的String * 月(M)、日(d)、12小时(h)、24小时(H)、分(m)、秒(s)、周(E)、季度(q)
     可以用 1-2 个占位符 * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) * eg: * (new
     Date()).format("yyyy-MM-dd hh:mm:ss.S")==> 2006-07-02 08:09:04.423

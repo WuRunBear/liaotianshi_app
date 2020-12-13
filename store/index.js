@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import chatMessage from './modules/chatMessage.js'
+import chatRoom from './modules/chatRoom.js'
 import user from './modules/user.js'
 
 Vue.use(Vuex)
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     chatMessage,
+    chatRoom,
     user
   }
 })

@@ -1,11 +1,12 @@
 <template>
   <view class="content" @click="$refs.more.$emit('hidden')">
-        <chat-item
-          v-for="(item, index) in chatList"
-          :key="index"
-          :data="item"
-        />
+    <chat-item
+      v-for="(item, index) in chatList"
+      :key="index"
+      :data="item"
+    />
 
+    <!-- 右上角的菜单 -->
     <more ref="more" :data="more" />
   </view>
 </template>
