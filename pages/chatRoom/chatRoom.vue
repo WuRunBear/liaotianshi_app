@@ -1,56 +1,54 @@
 <template>
   <view class="chat">
-    <div class="message_list" ref="mesList">
-      <view
-        class="message_item"
-        v-for="(item, index) in messageList"
-        :key="index"
-        :id="'key-' + index"
-      >
+    <scroll-view
+      scroll-y
+      :scroll-top="scrollTop"
+      id="message_list"
+      class="message_list"
+      ref="mesList"
+    >
+      <view id="message_list_container" class="message_list_container">
         <view
-          class="message_item_time"
-          v-if="interval(item.sendTime, index > 0 ? messageList[index - 1].sendTime : null)"
+          class="message_item"
+          v-for="(item, index) in messageList"
+          :key="index"
+          :id="'key-' + index"
         >
-          {{ item.sendTime | format }}
-        </view>
+          <view
+            class="message_item_time"
+            v-if="interval(item.sendTime, index > 0 ? messageList[index - 1].sendTime : null)"
+          >
+            {{ item.sendTime | format }}
+          </view>
 
-        <message-item :msg="item" />
+          <message-item :msg="item" />
+        </view>
       </view>
-    </div>
+    </scroll-view>
 
     <!-- 发消息等操作 -->
-    <view class="chat_operate">
-      <view class="chat_operate_voice"><u-icon name="volume-up" size="50"></u-icon></view>
-
-      <view class="chat_operate_msg">
-        <textarea v-model="message" class="msg_text" placeholder="请输入" confirm-type="send" />
-      </view>
-
-      <view class="chat_operate_send">
-        <u-button @click="send" type="success" size="mini" ripple>发送</u-button>
-      </view>
-
-      <view class="chat_operate_more">
-        <view class="more_btn"><u-icon name="plus-circle" size="50"></u-icon></view>
-      </view>
-    </view>
+    <chat-operate @send="send" @changeHeight="msgListDown" />
   </view>
 </template>
 
 <script>
 import messageItem from './components/message-item.vue';
+import chatOperate from './components/chat-operate.vue';
+import { mapState } from 'vuex';
 export default {
   components: {
-    messageItem
+    messageItem,
+    chatOperate
   },
   data() {
     return {
-      message: '',
+      scrollTop: 0,
       messageList: [
         {
+          id: 1,
           message: {
             url: '/static/mp3/1.mp3',
-            size: 1,
+            size: 15
           },
           type: 1,
           sendTime: '2020-12-2 10:11:11',
@@ -61,9 +59,10 @@ export default {
           }
         },
         {
+          id: 2,
           message: {
             url: '/static/mp3/2.mp3',
-            size: 1,
+            size: 1
           },
           type: 1,
           sendTime: '2020-12-2 10:09:10',
@@ -74,6 +73,7 @@ export default {
           }
         },
         {
+          id: 3,
           message: `测试1fdasfdsafdsfvdsafdsaagrgfdsafd`,
           type: 0,
           sendTime: '2020-12-2 10:08:09',
@@ -84,6 +84,7 @@ export default {
           }
         },
         {
+          id: 4,
           message: `测试1fdasfdsafdsfvdsafdsaagrgfdsafd`,
           type: 0,
           sendTime: '2020-12-2 10:05:08',
@@ -94,6 +95,7 @@ export default {
           }
         },
         {
+          id: 5,
           message: `测试1fdasfdsafdsfvdsafdsaagrgfdsafd`,
           type: 0,
           sendTime: '2020-12-2 10:05:08',
@@ -104,6 +106,7 @@ export default {
           }
         },
         {
+          id: 6,
           message: `测试1fdasfdsafdsfvdsafdsaagrgfdsafd`,
           type: 0,
           sendTime: '2020-12-2 10:05:08',
@@ -114,6 +117,7 @@ export default {
           }
         },
         {
+          id: 7,
           message: `测试1fdasfdsafdsfvdsafdsaagrgfdsafd`,
           type: 0,
           sendTime: '2020-12-2 10:05:08',
@@ -124,6 +128,7 @@ export default {
           }
         },
         {
+          id: 8,
           message: `测试1fdasfdsafdsfvdsafdsaagrgfdsafd`,
           type: 0,
           sendTime: '2020-12-2 10:05:08',
@@ -136,25 +141,28 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapState({
+      playing_audio: state => state.chatRoom.playing_audio
+    })
+  },
   onLoad(e) {
     this.msgListDown();
-    console.log(e);
   },
-  updated() {
-    this.$nextTick(function() {
-      console.log(this.$refs.mesList.offsetHeight);
-      // this.msgListDown();
-    });
+  onHide() {
+    this.playing_audio && this.playing_audio.stop(); // 停止播放
+  },
+  onUnload() {
+    this.playing_audio && this.playing_audio.stop(); // 停止播放
   },
   methods: {
     /**
      * 发送消息
      */
     send() {
-      if (this.message == '') return;
-
       this.messageList.push({
         message: this.message,
+        type: 0,
         sendTime: new Date().format(),
         master: {
           number: 1234567891,
@@ -164,12 +172,23 @@ export default {
       });
 
       this.msgListDown();
-      this.message = '';
     },
     /**
      * 消息列表拉到最底
      */
-    msgListDown() {},
+    msgListDown() {
+      this.$nextTick(() => {
+        let that = this;
+        let query = uni.createSelectorQuery();
+        query.select('#message_list').boundingClientRect();
+        query.select('#message_list_container').boundingClientRect();
+        query.exec(res => {
+          if (res[1].height > res[0].height) {
+            that.scrollTop = res[1].height - res[0].height;
+          }
+        });
+      });
+    },
     /**
      * 消息时间间隔
      */
@@ -237,54 +256,20 @@ export default {
   flex-direction: column;
   .message_list {
     flex: 1;
-    overflow-y: auto;
-    padding: 20rpx 0;
+    overflow: hidden;
     background-color: #eeeeee;
-    .message_item {
-      margin-bottom: 50rpx;
-      .message_item_time {
-        text-align: center;
-        font-size: 20rpx;
+    .message_list_container {
+      padding: 20rpx 0;
+      .message_item {
+        margin-bottom: 50rpx;
+        .message_item_time {
+          text-align: center;
+          font-size: 20rpx;
+        }
       }
-    }
-    .message_item:last-child {
-      margin-bottom: 0;
-    }
-  }
-  .chat_operate {
-    height: 85rpx;
-    display: flex;
-    align-items: center;
-    border-top: solid 0.5rpx #555555;
-    background-color: #eeeeee;
-    [class^='chat_operate_'] {
-      width: 80rpx;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .chat_operate_voice {
-      width: 60rpx;
-      margin-left: 10rpx;
-    }
-    .chat_operate_msg {
-      flex: 1;
-      padding: 10rpx;
-      overflow: hidden;
-      .msg_text {
-        width: 100%;
-        height: 70%;
-        background-color: #ffffff;
-        border-radius: 15rpx;
-        padding: 10rpx;
+      .message_item:last-child {
+        margin-bottom: 0;
       }
-    }
-    .chat_operate_send {
-      width: 100rpx;
-    }
-    .chat_operate_more {
-      width: 85rpx;
     }
   }
 }

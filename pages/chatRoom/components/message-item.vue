@@ -14,13 +14,20 @@
         <view class="user_name">{{ msg.master.userName }}</view>
 
         <!-- 文字 -->
-        <view @click="msgClick(msg.message, msg.type)" class="user_message" v-if="msg.type == 0">
+        <view
+          @click="msgClick(msg.message, msg.type)"
+          class="user_message"
+          v-if="!msg.type || msg.type == 0"
+        >
           {{ msg.message }}
         </view>
         <!-- 语音 -->
         <view
           @click="msgClick(msg.message, msg.type)"
           class="user_message user_voice"
+          :style="{
+            width: msg.message.size * 15 + 'rpx'
+          }"
           v-else-if="msg.type == 1"
         >
           <!-- 未播放 -->
@@ -60,7 +67,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 export default {
   name: 'message-item',
   props: {
@@ -79,14 +86,12 @@ export default {
         picture: ''
       },
       voicePlaying: false,
+      audio: null
     };
   },
   computed: {
-    // ...mapGetters({
-    //   playing_audio: 'chatRoom/playing_audio'
-    // })
     ...mapState({
-      playing_audio: state => state.chatRoom.playing_audi,
+      playing_audio: state => state.chatRoom.playing_audio
     })
   },
   created() {
@@ -94,65 +99,76 @@ export default {
   },
   methods: {
     msgClick(obj, type) {
-      if (type == 0) { // 文字
+      if (type == 0) {
+        // 文字
         console.log(type, obj);
-      } else if (type == 1) { // 语音
+      } else if (type == 1) {
+        // 语音
         // 播放语音
         this.toggleVoicePlay();
-        // console.log(type, obj);
-      } else if (type == 2) { // 图片
+      } else if (type == 2) {
+        // 图片
         console.log(type, obj);
-      } else if (type == 3) { // 视频
+      } else if (type == 3) {
+        // 视频
         console.log(type, obj);
-      } else if (type == 4) { // 文件
+      } else if (type == 4) {
+        // 文件
         console.log(type, obj);
       }
     },
     /**
      * 初始化
      */
-    init(){
-      if(this.msg.type == 1){
-        
+    init() {
+      if (this.msg.type == 1) {
       }
     },
-    createAudio(){
+    createAudio() {
       this.audio = this.createInnerAudioContext({
         src: this.msg.message.url,
-        onPlay: ()=>{
+        onPlay: () => {
           this.voicePlaying = true;
         },
-        onStop: ()=>{ // 停止播放 更改状态并销毁实列
-          this.voicePlaying = false;
-          this.audio.destroy();
-          this.audio = null;
-      console.log(this.audio)
+        onStop: () => {
+          // 停止播放 更改状态并销毁实列
+          this.delVoicePlay();
         },
-        onEnded: ()=>{ // 播放完毕 更改状态并销毁实列
-          this.voicePlaying = false;
-          this.audio.destroy();
-          this.audio = null;
+        onEnded: () => {
+          // 播放完毕 更改状态并销毁实列
+          this.delVoicePlay();
         }
       });
+    },
+    delVoicePlay() {
+      this.voicePlaying = false;
+      console.log(1)
+      if(this.playing_audio.id == this.audio.id){
+        this.$store.commit('chatRoom/delPlaying_audio'); // 清除vuex中正在播放的实列
+      }
+      this.audio.destroy();
+      this.audio = null;
     },
     /**
      * 播放语音
      */
     toggleVoicePlay() {
-      if(!this.audio){
+      if (!this.audio) {
         this.createAudio();
       }
 
-      if(this.voicePlaying){ // 如果正在播放中
+      if (this.voicePlaying) {
+        // 如果正在播放中
         this.audio.stop(); // 停止播放
-      }else{ // 不在播放中
-        if(this.playing_audio && this.playing_audio !== this.audio){ // 如果正在播放其他语音
+      } else {
+        // 不在播放中
+        if (this.playing_audio) {
+          // 如果正在播放其他语音 并且不是新的要播放的就停掉
           this.playing_audio.stop(); // 停止
         }
-        this.$store.commit('chatRoom/setPlaying_audio', this.audio) // 更改正在播放的语音
+        this.$store.commit('chatRoom/setPlaying_audio', this.audio); // 更改正在播放的语音
         this.audio.play(); // 开始播放
       }
-      console.log(this.audio)
     }
   },
 };
@@ -185,7 +201,8 @@ export default {
       word-break: break-all;
     }
     .user_voice {
-      width: 250rpx;
+      max-width: 494rpx;
+      min-width: 140rpx;
       display: flex;
       align-items: center;
 

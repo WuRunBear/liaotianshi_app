@@ -42,7 +42,7 @@ export default {
 
 <style lang="scss">
 // 自定义icon
-// @import '@/static/icon/style.css';
+@import './static/icon/iconfont.css';
 // uview
 @import 'uview-ui/index.scss';
 /*每个页面公共css */
