@@ -14,18 +14,18 @@
             "titleAlign": "left",
             "buttons": [{
                 "type": "none",
-                "fontSrc": "static/icon/fonts/icomoon.ttf",
-                "text": "\ue909",
+                "fontSrc": "static/icon/iconfont.ttf",
+                "text": "\ue8a0",
                 "width": "100rpx",
-                "fontSize": "35rpx",
+                "fontSize": "40rpx",
                 "types": "more"
               },
               {
                 "type": "none",
-                "fontSrc": "static/icon/fonts/icomoon.ttf",
-                "text": "\uf002",
+                "fontSrc": "static/icon/iconfont.ttf",
+                "text": "\ue8a9",
                 "width": "100rpx",
-                "fontSize": "35rpx",
+                "fontSize": "40rpx",
                 "types": "search"
               }
             ],
@@ -47,7 +47,7 @@
                 "type": "none",
                 "text": "...",
                 "width": "100rpx",
-                "fontSize": "35rpx",
+                "fontSize": "40rpx",
                 "types": "detail"
               }
             ]
@@ -78,18 +78,18 @@
             "titleAlign": "left",
             "buttons": [{
                 "type": "none",
-                "fontSrc": "static/icon/fonts/icomoon.ttf",
-                "text": "\ue909",
+                "fontSrc": "static/icon/iconfont.ttf",
+                "text": "\ue8a0",
                 "width": "100rpx",
-                "fontSize": "35rpx",
+                "fontSize": "40rpx",
                 "types": "more"
               },
               {
                 "type": "none",
-                "fontSrc": "static/icon/fonts/icomoon.ttf",
-                "text": "\uf002",
+                "fontSrc": "static/icon/iconfont.ttf",
+                "text": "\ue8a9",
                 "width": "100rpx",
-                "fontSize": "35rpx",
+                "fontSize": "40rpx",
                 "types": "search"
               }
             ],
@@ -108,18 +108,18 @@
             "titleAlign": "left",
             "buttons": [{
                 "type": "none",
-                "fontSrc": "static/icon/fonts/icomoon.ttf",
-                "text": "\ue909",
+                "fontSrc": "static/icon/iconfont.ttf",
+                "text": "\ue8a0",
                 "width": "100rpx",
-                "fontSize": "35rpx",
+                "fontSize": "40rpx",
                 "types": "more"
               },
               {
                 "type": "none",
-                "fontSrc": "static/icon/fonts/icomoon.ttf",
-                "text": "\uf002",
+                "fontSrc": "static/icon/iconfont.ttf",
+                "text": "\ue8a9",
                 "width": "100rpx",
-                "fontSize": "35rpx",
+                "fontSize": "40rpx",
                 "types": "search"
               }
             ],
