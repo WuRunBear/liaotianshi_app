@@ -39,6 +39,7 @@
       "path": "pages/chatRoom/chatRoom",
       "style": {
         "app-plus": {
+          "softinputMode": "adjustResize",
           "titleNView": {
             "titleText": "用户名",
             "titleSize": "30rpx",

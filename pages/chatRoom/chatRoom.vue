@@ -147,6 +147,9 @@ export default {
     })
   },
   onLoad(e) {
+    uni.onWindowResize((res) => {
+      this.msgListDown();
+    });
     this.msgListDown();
   },
   onHide() {
