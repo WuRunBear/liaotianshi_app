@@ -13,12 +13,10 @@
 
 <script>
 import chatItem from "./components/chat-item.vue";
-import more from "@/components/more.vue";
 
 export default {
   components: {
-    "chat-item": chatItem,
-    more,
+    chatItem,
   },
   name: "chatList",
   data() {

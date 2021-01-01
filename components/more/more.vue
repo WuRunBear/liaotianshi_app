@@ -19,7 +19,22 @@ export default {
   props: {
     data: {
       type: Array,
-      default: ()=>[]
+      default: ()=>{
+        return [
+          {
+            text: "发起群聊",
+            to: {
+              path: "",
+            },
+          },
+          {
+            text: "添加好友",
+            to: {
+              path: "",
+            },
+          },
+        ];
+      }
     }
   },
   data() {
