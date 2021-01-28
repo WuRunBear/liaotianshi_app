@@ -72,10 +72,11 @@ export default {
 .more {
   top: 20rpx;
   right: 30rpx;
-  position: absolute;
+  position: fixed;
   border-radius: 10rpx;
   background-color: #ffffff;
   box-shadow: 4rpx 4rpx 10rpx rgba($color: #000000, $alpha: 0.5);
+  z-index: 99;
   .more_item {
     width: 200rpx;
     height: 100rpx;
