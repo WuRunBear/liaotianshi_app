@@ -12,7 +12,8 @@
             "titleText": "消息",
             "titleSize": "30rpx",
             "titleAlign": "left",
-            "buttons": [{
+            "buttons": [
+              {
                 "type": "none",
                 "fontSrc": "static/icon/iconfont.ttf",
                 "text": "\ue8a0",
@@ -44,7 +45,8 @@
             "titleText": "用户名",
             "titleSize": "30rpx",
             "titleAlign": "left",
-            "buttons": [{
+            "buttons": [
+              {
                 "type": "none",
                 "text": "...",
                 "width": "100rpx",
@@ -77,7 +79,8 @@
           "titleNView": {
             "titleSize": "30rpx",
             "titleAlign": "left",
-            "buttons": [{
+            "buttons": [
+              {
                 "type": "none",
                 "fontSrc": "static/icon/iconfont.ttf",
                 "text": "\ue8a0",
@@ -107,7 +110,8 @@
             "titleText": "通讯录",
             "titleSize": "30rpx",
             "titleAlign": "left",
-            "buttons": [{
+            "buttons": [
+              {
                 "type": "none",
                 "fontSrc": "static/icon/iconfont.ttf",
                 "text": "\ue8a0",
@@ -127,6 +131,13 @@
             "autoBackButton": false
           }
         }
+      }
+    },
+    {
+      "path": "pages/userDetail/userDetail",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
       }
     }
   ],
