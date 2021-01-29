@@ -4,6 +4,7 @@
       @touchstart="friend_item_back_show"
       @touchcancel="friend_item_back_hidden"
       @touchend="friend_item_back_hidden"
+      @click="toBVue(info.to)"
       :class="{ friend_item_back }"
       class="friend_item"
       v-if="info"
@@ -32,7 +33,7 @@ export default {
       default: () => null,
     },
   },
-  name: 'friend_item',
+  name: "friend-item",
   data() {
     return {
       info: this.data,
@@ -56,9 +57,7 @@ export default {
      * 跳转
      */
     toBVue(to) {
-      uni.navigateTo({
-        url: to.path,
-      });
+      uni.navigateTo(to);
     },
   },
 };
