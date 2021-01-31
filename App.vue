@@ -8,7 +8,7 @@ export default {
     //判断是否存在登录信息
     if (!userinfo.auto_login) {
       //不存在则跳转登录页
-      uni.reLaunch({
+      this.toPage("reLaunch", {
         url: '/pages/login/login',
         success: () => {
           //跳转完页面后再关闭启动页

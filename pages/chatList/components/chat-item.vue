@@ -67,7 +67,7 @@ export default {
      * 跳转
      */
     toBVue(to) {
-      uni.navigateTo({
+      this.toPage("navigateTo", {
         url: to.path,
       });
     },

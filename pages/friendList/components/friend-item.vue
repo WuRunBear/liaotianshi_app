@@ -4,7 +4,7 @@
       @touchstart="friend_item_back_show"
       @touchcancel="friend_item_back_hidden"
       @touchend="friend_item_back_hidden"
-      @click="toBVue(info.to)"
+      @click="toBVue"
       :class="{ friend_item_back }"
       class="friend_item"
       v-if="info"
@@ -57,7 +57,12 @@ export default {
      * 跳转
      */
     toBVue(to) {
-      uni.navigateTo(to);
+      this.toPage("navigateTo", {
+        url: '/pages/userDetail/userDetail',
+        query: {
+          number: this.info.number
+        }
+      });
     },
   },
 };

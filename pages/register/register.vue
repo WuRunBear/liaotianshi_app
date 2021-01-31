@@ -144,7 +144,7 @@ export default {
           // 将新注册的用户账号返回给login页面
           uni.$emit('register', { number: 1234567891 });
 
-          uni.navigateBack();
+          this.toPage("navigateBack");
         }
       });
     }

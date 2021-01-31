@@ -2,6 +2,7 @@
   <view class="more" v-show="more_show">
     <view
       v-for="(item, index) in data"
+      :key='index'
       class="more_item"
       :class="{ more_item_actice: more_item_index == index }"
       @click='itemClick(item.to)'
@@ -45,8 +46,7 @@ export default {
   },
   methods: {
     itemClick(to){
-      let fun = to.fun ? to.fun : 'navigateTo';
-      uni[fun]({
+      this.toPage(to.fun, {
         url: to.path,
       });
     },

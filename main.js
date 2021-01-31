@@ -99,6 +99,37 @@ Date.prototype.getIsSameWeek = function(date = new Date()) {
   return parseInt((old_count + 4) / 7) == parseInt((now_other + 4) / 7);
 }
 
+/**
+ * 将参数对象转为URL
+ * @param {Object} query 参数对象
+ */
+Vue.prototype.queryToUrl = (query) => {
+  let url = '?';
+
+  for (const key in query) {
+    if (Object.hasOwnProperty.call(query, key)) {
+      const e = query[key];
+      url += `${key}=${e}`;
+      url += Object.keys(query).indexOf(key) < Object.keys(query).length-1 ? "&" : "";
+    }
+  }
+
+  return url == '?' ? '' : url;
+}
+/**
+ * 跳转页面
+ * @param {String} fun 跳转页面的uni方法名
+ * @param {Object} conf 参数对象
+ */
+Vue.prototype.toPage = (fun, conf) => {
+  if(conf.query){
+    conf.url += Vue.prototype.queryToUrl(conf.query);
+    delete conf.query;
+  }
+  console.log(conf)
+  uni[fun ? fun : "navigateTo"](conf)
+}
+
 const app = new Vue({
   ...App,
   store

@@ -14,7 +14,7 @@ export default {
   methods: {
     tuic() {
       uni.removeStorageSync('userInfo');
-      uni.reLaunch({
+      this.toPage("reLaunch", {
         url: '/pages/login/login'
       });
     }

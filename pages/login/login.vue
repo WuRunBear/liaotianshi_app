@@ -86,12 +86,12 @@ export default {
   },
   methods: {
     register() {
-      uni.navigateTo({
+      this.toPage("navigateTo", {
         url: '/pages/register/register'
       });
     },
     getBackPwd() {
-      uni.navigateTo({
+      this.toPage("navigateTo", {
         url: '/pages/getBackPwd/getBackPwd'
       });
     },
@@ -103,7 +103,7 @@ export default {
             uni.setStorageSync('userInfo', this.userInfo);
 
             //登录成功跳转到首页
-            uni.reLaunch({
+            this.toPage("reLaunch", {
               url: '/pages/chatList/chatList'
             });
           } else {
