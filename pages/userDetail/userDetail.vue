@@ -67,19 +67,19 @@ export default {
         address: "",
         sex: true,
         isSelf: false,
-        isFriend: true,
+        isFriend: false,
       },
       modalShow: false,
     };
   },
   methods: {
     addFriend() {
-      // this.toPage({
-      //   url: '',
-      //   query: {
-      //     number: this.number
-      //   }
-      // })
+      this.toPage("navigateTo", {
+        url: "/pages/addFriend/addFriend",
+        query: {
+          number: this.number,
+        },
+      });
     },
     send() {},
     delFriend() {

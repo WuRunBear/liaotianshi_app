@@ -139,11 +139,18 @@
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/addFriend/addFriend",
+      "style": {
+        "navigationBarTitleText": "添加好友",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-		"pageOrientation": "portrait",
+    "pageOrientation": "portrait",
     "app-plus": {
       "softinputMode": "adjustResize"
     }
@@ -177,14 +184,14 @@
       }
     ]
   },
-	"condition" : { //模式配置，仅开发期间生效
-		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [
-			{
-				"name": "userDetail", //模式名称
-				"path": "pages/userDetail/userDetail", //启动页面，必选
-				"query": "number=1234567811" //启动参数，在页面的onLoad函数里面得到
-			}
-		]
-	}
+  "condition": { //模式配置，仅开发期间生效
+    "current": 0, //当前激活的模式(list 的索引项)
+    "list": [
+      {
+        "name": "userDetail", //模式名称
+        "path": "pages/userDetail/userDetail", //启动页面，必选
+        "query": "number=1234567811" //启动参数，在页面的onLoad函数里面得到
+      }
+    ]
+  }
 }
