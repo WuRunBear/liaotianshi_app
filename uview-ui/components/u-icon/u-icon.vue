@@ -1,48 +1,21 @@
 <template>
-	<view
-    :style="[customStyle]"
-    class="u-icon"
-    @tap="click"
-    @touchstart='clickstart'
-    @touchend='clickend'
-    :class="['u-icon--' + labelPos]"
-  >
-		<image
-      class="u-icon__img"
-      v-if="isImg"
-      :src="name"
-      :mode="imgMode"
-      :style="[imgStyle]"
-    ></image>
-		<text
-      v-else
-      class="u-icon__icon"
-      :class="customClass"
-      :style="[{...iconStyle,...iconHoverColor}]"
-      :hover-class="hoverClass"
-			@touchstart="touchstart"
-    >
-			<text
-        v-if="showDecimalIcon"
-        :style="[decimalIconStyle]"
-        :class="decimalIconClass"
-        :hover-class="hoverClass"
-				class="u-icon__decimal"
-      >
+	<view :style="[customStyle]" class="u-icon" @tap="click" :class="['u-icon--' + labelPos]">
+		<image class="u-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="[imgStyle]"></image>
+		<text v-else class="u-icon__icon" :class="customClass" :style="[iconStyle]" :hover-class="hoverClass"
+			  @touchstart="touchstart">
+			<text v-if="showDecimalIcon" :style="[decimalIconStyle]" :class="decimalIconClass" :hover-class="hoverClass"
+				  class="u-icon__decimal">
 			</text>
 		</text>
 		<!-- 这里进行空字符串判断，如果仅仅是v-if="label"，可能会出现传递0的时候，结果也无法显示 -->
-		<text
-      v-if="label !== ''" class="u-icon__label"
-      :style="{
-        color: labelColor,
-        fontSize: $u.addUnit(labelSize),
-        marginLeft: labelPos == 'right' ? $u.addUnit(marginLeft) : 0,
-        marginTop: labelPos == 'bottom' ? $u.addUnit(marginTop) : 0,
-        marginRight: labelPos == 'left' ? $u.addUnit(marginRight) : 0,
-        marginBottom: labelPos == 'top' ? $u.addUnit(marginBottom) : 0,
-      }"
-    >{{ label }}
+		<text v-if="label !== ''" class="u-icon__label" :style="{
+			color: labelColor,
+			fontSize: $u.addUnit(labelSize),
+			marginLeft: labelPos == 'right' ? $u.addUnit(marginLeft) : 0,
+			marginTop: labelPos == 'bottom' ? $u.addUnit(marginTop) : 0,
+			marginRight: labelPos == 'left' ? $u.addUnit(marginRight) : 0,
+			marginBottom: labelPos == 'top' ? $u.addUnit(marginBottom) : 0,
+		}">{{ label }}
 		</text>
 	</view>
 </template>
@@ -68,7 +41,6 @@
  * @property {String} label-pos label相对于图标的位置，只能right或bottom（默认right）
  * @property {String} index 一个用于区分多个图标的值，点击图标时通过click事件传出
  * @property {String} hover-class 图标按下去的样式类，用法同uni的view组件的hover-class参数，详情见官网
- * @property {String} hover-color 图标按下去的颜色
  * @property {String} width 显示图片小图标时的宽度
  * @property {String} height 显示图片小图标时的高度
  * @property {String} top 图标在垂直方向上的定位
@@ -113,11 +85,6 @@ export default {
 			type: String,
 			default: ''
 		},
-		// 触摸图标时的颜色
-    hoverColor: {
-      type: String,
-      default: '#999999'
-    },
 		// 自定义扩展前缀，方便用户扩展自己的图标库
 		customPrefix: {
 			type: String,
@@ -206,12 +173,7 @@ export default {
 			default: '50'
 		}
 	},
-  data(){
-    return {
-      isClick: false
-    }
-  },
-  computed: {
+	computed: {
 		customClass() {
 			let classes = []
 			classes.push(this.customPrefix + '-' + this.name)
@@ -232,16 +194,6 @@ export default {
 			//#endif
 			return classes
 		},
-		iconHoverColor() {
-      // 如果按下
-      let style = {};
-      if(this.isClick) {
-        style = {
-          color: this.hoverColor,
-        };
-      }
-      return style;
-    },
 		iconStyle() {
 			let style = {}
 			style = {
@@ -307,13 +259,7 @@ export default {
 		},
 		touchstart() {
 			this.$emit('touchstart', this.index)
-		},
-    clickstart() {
-      this.isClick = true;
-    },
-    clickend() {
-      this.isClick = false;
-    }
+		}
 	}
 }
 </script>
