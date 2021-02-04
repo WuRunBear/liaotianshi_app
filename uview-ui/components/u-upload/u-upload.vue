@@ -246,9 +246,7 @@ export default {
 		limitType:{
 			type: Array,
 			default() {
-				// 支付宝小程序真机选择图片的后缀为"image"
-				// https://opendocs.alipay.com/mini/api/media-image
-				return ['png', 'jpg', 'jpeg', 'webp', 'gif', 'image'];
+				return ['png', 'jpg', 'jpeg', 'webp', 'gif'];
 			}
 		},
 		// 在各个回调事件中的最后一个参数返回，用于区别是哪一个组件的事件

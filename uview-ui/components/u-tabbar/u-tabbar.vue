@@ -27,7 +27,8 @@
 					></u-badge>
 				</view>
 				<view class="u-tabbar__content__item__text" :style="{
-					color: elColor(index)
+					color: elColor(index),
+          fontSize: textSize + 'rpx'
 				}">
 					<text class="u-line-1">{{item.text}}</text>
 				</view>
@@ -80,6 +81,11 @@
 				type: [String, Number],
 				default: 90
 			},
+      // 字体大小，单位默认rpx
+      textSize: {
+      	type: [String, Number],
+      	default: 22
+      },
 			// 激活时的演示，包括字体图标，提示文字等的演示
 			activeColor: {
 				type: String,
@@ -292,11 +298,9 @@
 					font-size: 26rpx;
 					line-height: 28rpx;
 					position: absolute;
-					bottom: 14rpx;
+					bottom: 4rpx;
 					left: 50%;
 					transform: translateX(-50%);
-					width: 100%;
-					text-align: center;
 				}
 			}
 
