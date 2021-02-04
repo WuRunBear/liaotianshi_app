@@ -14,14 +14,14 @@ Vue.use(uView);
  * 创建audio对象
  * @param {Object} conf audio参数
  */
-Vue.prototype.createInnerAudioContext = function(conf){
+Vue.prototype.createInnerAudioContext = function (conf) {
   let innerAudioContext = uni.createInnerAudioContext();
 
   for (const key in conf) {
     if (conf.hasOwnProperty(key)) {
-      if('function' == typeof innerAudioContext[key]) {
+      if ('function' == typeof innerAudioContext[key]) {
         innerAudioContext[key](conf[key]);
-      }else{
+      } else {
         innerAudioContext[key] = conf[key];
       }
     }
@@ -39,7 +39,7 @@ Vue.prototype.createInnerAudioContext = function(conf){
  * (new Date()).format("yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 星期二 08:09:04
  * (new Date()).format("yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18
  */
-Date.prototype.format = function(fmt = "yyyy-MM-dd HH:mm:ss") {
+Date.prototype.format = function (fmt = "yyyy-MM-dd HH:mm:ss") {
   var o = {
     "M+": this.getMonth() + 1, //月份
     "d+": this.getDate(), //日
@@ -77,7 +77,7 @@ Date.prototype.format = function(fmt = "yyyy-MM-dd HH:mm:ss") {
  * 返回某月天数
  * @param {Object} date 日期
  */
-Date.prototype.getMonthDay = function(date = new Date()) {
+Date.prototype.getMonthDay = function (date = new Date()) {
   let year = date.getFullYear(),
     month = date.getMonth();
   let d = new Date(year, month, 0);
@@ -87,7 +87,7 @@ Date.prototype.getMonthDay = function(date = new Date()) {
  * 判断是否为同一星期
  * @param {Object | String} dateOne 对比的日期
  */
-Date.prototype.getIsSameWeek = function(date = new Date()) {
+Date.prototype.getIsSameWeek = function (date = new Date()) {
   if ('string' == typeof date) {
     date = new Date(date);
   }
@@ -110,7 +110,7 @@ Vue.prototype.queryToUrl = (query) => {
     if (Object.hasOwnProperty.call(query, key)) {
       const e = query[key];
       url += `${key}=${e}`;
-      url += Object.keys(query).indexOf(key) < Object.keys(query).length-1 ? "&" : "";
+      url += Object.keys(query).indexOf(key) < Object.keys(query).length - 1 ? "&" : "";
     }
   }
 
@@ -122,12 +122,34 @@ Vue.prototype.queryToUrl = (query) => {
  * @param {Object} conf 参数对象
  */
 Vue.prototype.toPage = (fun, conf) => {
-  if(conf.query){
+  if (conf.query) {
     conf.url += Vue.prototype.queryToUrl(conf.query);
     delete conf.query;
   }
-  console.log(conf)
   uni[fun ? fun : "navigateTo"](conf)
+}
+
+/**
+ * 剪切板
+ * @param {Object} conf uni设置剪切板的配置对象 如果为空则是获取
+ */
+Vue.prototype.clipboard = (conf) => {
+  if (conf) {
+    return uni.setClipboardData({
+      data: conf.data,
+      success() {
+        conf.success && conf.success();
+      },
+      fail() {
+        conf.fail && conf.fail();
+      },
+      complete() {
+        conf.complete && conf.complete();
+      }
+    });
+  } else {
+    return uni.getClipboardData();
+  }
 }
 
 const app = new Vue({
