@@ -7,7 +7,7 @@
           size="large"
           show-sex
           :sex-icon="userInfo.sex ? 'man' : 'woman'"
-          :scr="userInfo.avatar"
+          :src="userInfo.avatar"
           shape="circle"
         />
       </view>
@@ -62,7 +62,7 @@ export default {
       userInfo: {
         name: "测试用户",
         number: 1234567811,
-        avatar: "",
+        avatar: "https://t7.baidu.com/it/u=2387439597,1787872516&fm=193&f=GIF",
         signature: "",
         address: "",
         sex: true,
@@ -76,8 +76,8 @@ export default {
     addFriend() {
       this.toPage("navigateTo", {
         url: "/pages/addFriend/addFriend",
-        query: {
-          number: this.number,
+        success: () => {
+          uni.$emit("addFriend", { userInfo: this.userInfo });
         },
       });
     },
@@ -106,7 +106,7 @@ export default {
     align-items: center;
     justify-content: center;
     .avatar {
-      box-shadow: 0rpx 15rpx 18rpx 0 rgba(21, 21, 26, 0.205);
+      box-shadow: 0rpx 15rpx 18rpx 0 $uni-text-color-shadow;
     }
   }
 

@@ -32,6 +32,7 @@ $uni-text-color-inverse:#fff;//反色
 $uni-text-color-grey:#999;//辅助灰色，如加载更多的提示信息
 $uni-text-color-placeholder: #808080;
 $uni-text-color-disable:#c0c0c0;
+$uni-text-color-shadow:rgba(21, 21, 26, 0.2); //阴影色
 
 /* 背景颜色 */
 $uni-bg-color:#ffffff;
@@ -63,7 +64,7 @@ $uni-border-radius-circle: 50%;
 /* 水平间距 */
 $uni-spacing-row-sm: 10px;
 $uni-spacing-row-base: 20rpx;
-$uni-spacing-row-lg: 30rpx;
+$uni-spacing-row-lg: 32rpx;
 
 /* 垂直间距 */
 $uni-spacing-col-sm: 8rpx;
