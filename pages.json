@@ -144,8 +144,7 @@
       "path": "pages/addFriend/addFriend",
       "style": {
         "enablePullDownRefresh": false,
-        "transparentTitle": "always",
-        "navigationBarBackgroundColor": "#00000000"
+        "transparentTitle": "auto"
       }
     }
   ],
