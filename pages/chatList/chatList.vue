@@ -23,7 +23,7 @@ export default {
     return {
       chatList: [
         {
-          picture: "",
+          avatar: "",
           name: "测试",
           time: "2020-12-1 10:10:10",
           newMsg: "hello",

@@ -10,12 +10,12 @@
       v-if="info"
     >
       <view class="left">
-        <u-image
+        <u-avatar
           class="picture"
-          width="96rpx"
-          height="96rpx"
-          :src="info.picture"
-        ></u-image>
+          size="96"
+          :src="info.avatar"
+          mode="square"
+        />
       </view>
 
       <view class="right">

@@ -1,13 +1,20 @@
 <template>
   <view class="content">
-    <view style="width: 100%;padding: 0 62rpx;margin: auto;">
-      <u-image class="logo" src="@/static/logo@3x.png" width="192rpx" height="91.6rpx" />
+    <view style="width: 100%; padding: 0 62rpx; margin: auto">
+      <u-image
+        class="logo"
+        src="@/static/logo@3x.png"
+        width="192rpx"
+        height="91.6rpx"
+      />
 
       <text class="title">登录\n</text>
-      <text style="font-size: 40rpx;color: rgba(39,40,50,0.50);">您好，欢迎来到 HChat！</text>
+      <text style="font-size: 40rpx; color: rgba(39, 40, 50, 0.5)"
+        >您好，欢迎来到 HChat！</text
+      >
 
       <!-- 表单 -->
-      <u-form :model="userInfo" ref="uForm" style="margin-top: 40rpx;">
+      <u-form :model="userInfo" ref="uForm" style="margin-top: 40rpx">
         <u-form-item prop="number" label-width="auto">
           <u-input
             v-model="userInfo.number"
@@ -27,7 +34,13 @@
         </u-form-item>
       </u-form>
 
-      <u-button class="loginBtn" @click="login" shape="circle" :ripple="true" :hair-line="false">
+      <u-button
+        class="loginBtn"
+        @click="Login"
+        shape="circle"
+        :ripple="true"
+        :hair-line="false"
+      >
         登录
       </u-button>
 
@@ -43,78 +56,78 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
       userInfo: {
-        number: '',
-        password: '',
+        number: "",
+        password: "",
         auto_login: true,
-        keep_password: true
+        keep_password: true,
       },
       rules: {
         number: [
           {
             required: true,
-            message: '请输入用户名',
-            trigger: ['change', 'blur']
+            message: "请输入用户名",
+            trigger: ["change", "blur"],
           },
           {
-            type: 'number',
+            type: "number",
             max: 10,
             min: 10,
-            message: '用户名格式错误，应是10位数的纯数字',
-            trigger: ['change', 'blur']
-          }
+            message: "用户名格式错误，应是10位数的纯数字",
+            trigger: ["change", "blur"],
+          },
         ],
         password: [
           {
             required: true,
-            message: '请输入密码',
-            trigger: ['change', 'blur']
+            message: "请输入密码",
+            trigger: ["change", "blur"],
           },
           {
-            type: 'string',
+            type: "string",
             max: 16,
             min: 6,
-            message: '密码格式错误，长度应是6~16个字符',
-            trigger: ['change', 'blur']
-          }
-        ]
-      }
+            message: "密码格式错误，长度应是6~16个字符",
+            trigger: ["change", "blur"],
+          },
+        ],
+      },
     };
+  },
+  computed: {
+    ...mapActions("user", ["login"]),
   },
   methods: {
     register() {
       this.toPage("navigateTo", {
-        url: '/pages/register/register'
+        url: "/pages/register/register",
       });
     },
     getBackPwd() {
       this.toPage("navigateTo", {
-        url: '/pages/getBackPwd/getBackPwd'
+        url: "/pages/getBackPwd/getBackPwd",
       });
     },
-    login(e) {
-      this.$refs.uForm.validate(valid => {
+    Login(e) {
+      this.$refs.uForm.validate((valid) => {
         if (valid) {
           // if ('1234567891' == this.userInfo.number && '123456' == this.userInfo.password) {
           if (this.userInfo.number && this.userInfo.password) {
-            uni.setStorageSync('userInfo', this.userInfo);
-
-            //登录成功跳转到首页
-            this.toPage("reLaunch", {
-              url: '/pages/chatList/chatList'
-            });
+            this.login();
           } else {
             this.$refs.uToast.show({
-              title: '登录失败，用户名或密码错误！',
-              type: 'error'
+              title: "登录失败，用户名或密码错误！",
+              type: "error",
             });
           }
         }
       });
-    }
+    },
   },
   onReady() {
     // 设置登录表单的验证规则
@@ -122,21 +135,21 @@ export default {
 
     // 设置导航栏
     uni.setNavigationBarColor({
-      frontColor: '#000000',
-      backgroundColor: 'rgba(255,255,255,0)',
+      frontColor: "#000000",
+      backgroundColor: "rgba(255,255,255,0)",
       success(e) {
-        console.log('setNav success', e);
+        console.log("setNav success", e);
       },
       fail(e) {
-        console.log('setNav fail', e);
-      }
+        console.log("setNav fail", e);
+      },
     });
 
     // 获取新注册的账号
-    uni.$on('register', data => {
+    uni.$on("register", (data) => {
       this.userInfo.number = data.number;
     });
-  }
+  },
 };
 </script>
 
@@ -151,6 +164,7 @@ export default {
     margin: 0 auto;
     margin-bottom: 54.4rpx;
   }
+
   .title {
     font-size: 56rpx;
     font-weight: bold;
@@ -167,6 +181,7 @@ export default {
     box-shadow: 0 25px 16px -18px rgba(255, 228, 49, 0.9);
     background-color: rgba(255, 228, 49, 1);
   }
+
   .other {
     width: 520rpx;
     margin: 0 auto;
@@ -176,6 +191,7 @@ export default {
     display: flex;
     justify-content: space-between;
   }
+
   .otherActive {
     color: rgba(59, 136, 204, 1);
   }
