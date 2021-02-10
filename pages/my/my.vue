@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "my",
@@ -27,10 +27,11 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["userInfo"]),
+    ...mapActions("user", ["logout"]),
   },
   methods: {
     tuic() {
-      console.log(this.userInfo);
+      this.logout();
     },
   },
 };
@@ -40,7 +41,7 @@ export default {
 .my-detail {
   display: flex;
   padding: $uni-spacing-col-base $uni-spacing-row-lg;
-  border-bottom: solid 1rpx #000;
+  border-bottom: solid 1rpx $uni-border-color;
 
   .info {
     flex: 1;

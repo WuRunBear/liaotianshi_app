@@ -114,6 +114,8 @@ export default {
       });
     },
     Login(e) {
+      this.login();
+      return false;
       this.$refs.uForm.validate((valid) => {
         if (valid) {
           // if ('1234567891' == this.userInfo.number && '123456' == this.userInfo.password) {
@@ -132,18 +134,6 @@ export default {
   onReady() {
     // 设置登录表单的验证规则
     this.$refs.uForm.setRules(this.rules);
-
-    // 设置导航栏
-    uni.setNavigationBarColor({
-      frontColor: "#000000",
-      backgroundColor: "rgba(255,255,255,0)",
-      success(e) {
-        console.log("setNav success", e);
-      },
-      fail(e) {
-        console.log("setNav fail", e);
-      },
-    });
 
     // 获取新注册的账号
     uni.$on("register", (data) => {

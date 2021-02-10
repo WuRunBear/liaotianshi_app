@@ -61,7 +61,9 @@
     // 登录
     {
       "path": "pages/login/login",
-      "style": {}
+      "style": {
+        "navigationStyle": "custom"
+      }
     },
     // 注册
     {
