@@ -166,22 +166,22 @@
       // 消息
       {
         "pagePath": "pages/chatList/chatList",
-        "iconPath": "static/index.png",
-        "selectedIconPath": "static/index-selected.png",
+        "iconPath": "static/chat.png",
+        "selectedIconPath": "static/chat-selected.png",
         "text": "消息"
       },
       // 通讯录
       {
         "pagePath": "pages/friendList/friendList",
-        "iconPath": "static/index.png",
-        "selectedIconPath": "static/index-selected.png",
+        "iconPath": "static/friends.png",
+        "selectedIconPath": "static/friends-selected.png",
         "text": "通讯录"
       },
       // 我的
       {
         "pagePath": "pages/my/my",
-        "iconPath": "static/center.png",
-        "selectedIconPath": "static/center-selected.png",
+        "iconPath": "static/user.png",
+        "selectedIconPath": "static/user-selected.png",
         "text": "我"
       }
     ]
