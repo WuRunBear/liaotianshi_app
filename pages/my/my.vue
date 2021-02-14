@@ -1,6 +1,11 @@
 <template>
   <view>
-    <view class="my-detail">
+    <view
+      class="my-detail"
+      hover-class="hover-class"
+      hover-start-time="50"
+      hover-stay-time="50"
+    >
       <u-avatar
         class="avatar"
         :src="userInfo.avatar"
@@ -45,6 +50,8 @@ export default {
 
   .info {
     flex: 1;
+    display: flex;
+    align-items: center;
     margin-left: $uni-spacing-row-lg;
   }
 }

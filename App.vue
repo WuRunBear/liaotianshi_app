@@ -47,4 +47,7 @@ export default {
 // uview
 @import "uview-ui/index.scss";
 /*每个页面公共css */
+.hover-class{
+  background-color: $uni-bg-color-hover;
+}
 </style>

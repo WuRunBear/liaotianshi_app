@@ -4,7 +4,7 @@
       <view class="user-avatar">
         <u-avatar
           class="avatar"
-          size="large"
+          :size="180"
           show-sex
           :sex-icon="userInfo.sex ? 'man' : 'woman'"
           :src="userInfo.avatar"
