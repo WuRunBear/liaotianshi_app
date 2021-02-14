@@ -1,7 +1,7 @@
 <template>
   <view>
     <!-- 其他 -->
-    <view class="more">
+    <view class="other">
       <friend-item
         :data="{
           title: '新的好友',

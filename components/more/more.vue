@@ -1,16 +1,20 @@
 <template>
-  <view class="more" v-show="more_show">
-    <view
-      v-for="(item, index) in data"
-      :key='index'
-      class="more_item"
-      :class="{ more_item_actice: more_item_index == index }"
-      @click='itemClick(item.to)'
-      @touchstart="more_item_index = index"
-      @touchcancel="more_item_index = null"
-      @touchend="more_item_index = null"
-    >
-      {{ item.text }}
+  <view v-show="more_show">
+    <view class="mask" @click="hidden"></view>
+
+    <view class="more">
+      <view
+        v-for="(item, index) in data"
+        :key="index"
+        class="more_item"
+        :class="{ more_item_actice: more_item_index == index }"
+        @click="itemClick(item.to)"
+        @touchstart="more_item_index = index"
+        @touchcancel="more_item_index = null"
+        @touchend="more_item_index = null"
+      >
+        {{ item.text }}
+      </view>
     </view>
   </view>
 </template>
@@ -20,7 +24,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default: ()=>{
+      default: () => {
         return [
           {
             text: "发起群聊",
@@ -35,40 +39,48 @@ export default {
             },
           },
         ];
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       more_item_index: null,
-      more_show: false
+      more_show: false,
     };
   },
   methods: {
-    itemClick(to){
+    itemClick(to) {
       this.toPage(to.fun, {
         url: to.path,
       });
     },
-    show(){
+    show() {
       this.more_show = true;
     },
-    hidden(){
+    hidden() {
       this.more_show = false;
     },
-    toggle(){
+    toggle() {
       this.more_show = !this.more_show;
-    }
+    },
   },
   created() {
-    this.$on('show', this.show);
-    this.$on('hidden', this.hidden);
-    this.$on('toggle', this.toggle);
-  }
+    this.$on("show", this.show);
+    this.$on("hidden", this.hidden);
+    this.$on("toggle", this.toggle);
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
 .more {
   top: 20rpx;
   right: 30rpx;

@@ -1,5 +1,5 @@
 <template>
-  <view class="content" @click="$refs.more.$emit('hidden')">
+  <view class="content">
     <chat-item
       v-for="(item, index) in chatList"
       :key="index"
