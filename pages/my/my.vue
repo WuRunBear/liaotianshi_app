@@ -2,6 +2,7 @@
   <view>
     <view
       class="my-detail"
+      @click="to"
       hover-class="hover-class"
       hover-start-time="50"
       hover-stay-time="50"
@@ -37,6 +38,17 @@ export default {
   methods: {
     tuic() {
       this.logout();
+    },
+    to() {
+      this.toPage("navigateTo", {
+        url: "/pages/userDetail/userDetail",
+        success: () => {
+          uni.$emit("userDetail", {
+            number: this.userInfo.number,
+            userInfo: this.userInfo,
+          });
+        },
+      });
     },
   },
 };

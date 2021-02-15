@@ -58,10 +58,13 @@ export default {
      */
     toBVue(to) {
       this.toPage("navigateTo", {
-        url: '/pages/userDetail/userDetail',
-        query: {
-          number: this.info.number
-        }
+        url: "/pages/userDetail/userDetail",
+        success: function() {
+          this.$emit("userDetail", {
+            number: this.userInfo.number,
+            userInfo: this.userInfo,
+          });
+        },
       });
     },
   },

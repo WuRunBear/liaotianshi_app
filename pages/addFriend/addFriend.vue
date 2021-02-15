@@ -66,11 +66,12 @@ export default {
       });
     },
   },
-  onLoad(e) {
+  onShow(e) {
     uni.$once("addFriend", (e) => {
       this.userInfo = e.userInfo;
     });
   },
+  onLoad(e) {},
 };
 </script>
 

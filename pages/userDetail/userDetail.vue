@@ -32,8 +32,7 @@
             ripple
             type="error"
             @click="delFriend"
-            >删除好友</u-button
-          >
+          >删除好友</u-button>
         </view>
       </view>
     </view>
@@ -60,17 +59,24 @@ export default {
     return {
       number: null,
       userInfo: {
-        name: "测试用户",
-        number: 1234567811,
-        avatar: "https://t7.baidu.com/it/u=2387439597,1787872516&fm=193&f=GIF",
-        signature: "",
-        address: "",
+        name: "默认数据",
+        number: 1234567891,
+        avatar: "",
+        signature: "这个人很懒什么都没写",
+        address: "默认数据",
         sex: true,
         isSelf: false,
         isFriend: false,
       },
       modalShow: false,
     };
+  },
+  watch: {
+    'userInfo.name': function (newV){
+      uni.setNavigationBarTitle({
+        title: newV,
+      });
+    }
   },
   methods: {
     addFriend() {
@@ -87,13 +93,18 @@ export default {
     },
     modalConfirm() {},
   },
-  onLoad(e = {}) {
-    this.number = e.number && e.number;
+  onShow() {
+    uni.$once("userDetail", (e) => {
+      this.userInfo = e.userInfo;
+      this.number = e.number;
 
-    uni.setNavigationBarTitle({
-      title: this.userInfo.name,
+      // 重新请求信息
+      if(!this.userInfo.isSelf) {
+        // ...
+      }
     });
   },
+  onLoad(e = {}) {},
 };
 </script>
 
