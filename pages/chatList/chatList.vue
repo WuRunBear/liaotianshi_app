@@ -1,10 +1,6 @@
 <template>
   <view class="content">
-    <chat-item
-      v-for="(item, index) in chatList"
-      :key="index"
-      :data="item"
-    />
+    <chat-item v-for="(item, index) in chatList" :key="index" :data="item" />
 
     <!-- 右上角的菜单 -->
     <more ref="more" :data="more" />
@@ -102,11 +98,18 @@ export default {
    * 点击顶部右侧按钮
    */
   onNavigationBarButtonTap(e) {
-    if ("search" == e.types) {
-      this.$refs.more.$emit("hidden");
-    } else if ("more" == e.types) {
-      this.$refs.more.$emit("toggle");
+    switch (e.fun) {
+      case "search":
+        this.toPage("navigateTo", {
+          url: "/pages/search/search",
+        });
+        break;
+      case "more":
+        this.$refs.more.$emit("toggle");
+        return;
     }
+
+    this.$refs.more.$emit("hidden");
   },
 };
 </script>

@@ -35,7 +35,7 @@ export default {
           {
             text: "添加好友",
             to: {
-              path: "",
+              path: "/pages/search/search",
             },
           },
         ];
