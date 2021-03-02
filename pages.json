@@ -210,6 +210,11 @@
         "name": "addFriend", //模式名称
         "path": "pages/addFriend/addFriend", //启动页面，必选
         "query": "userInfo='{\"name\":\"测试用户\",\"number\":1234567811,\"avatar\":\"\",\"signature\":\"\",\"address\":\"\",\"sex\":true,\"isSelf\":false,\"isFriend\":false}'" //启动参数，在页面的onLoad函数里面得到
+      },
+      {
+        "name": "search", //模式名称
+        "path": "pages/search/search", //启动页面，必选
+        "query": "" //启动参数，在页面的onLoad函数里面得到
       }
     ]
   }
