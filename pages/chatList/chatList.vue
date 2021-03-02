@@ -1,19 +1,19 @@
 <template>
   <view class="content">
-    <chat-item v-for="(item, index) in chatList" :key="index" :data="item" />
+    <list-item
+      v-for="(item, index) in chatList"
+      :key="index"
+      :data="item"
+      @click="toBVue({ path: '/pages/chatRoom/chatRoom?room_id=123456' })"
+    />
 
     <!-- 右上角的菜单 -->
-    <more ref="more" :data="more" />
+    <more ref="more" />
   </view>
 </template>
 
 <script>
-import chatItem from "./components/chat-item.vue";
-
 export default {
-  components: {
-    chatItem,
-  },
   name: "chatList",
   data() {
     return {
@@ -25,31 +25,9 @@ export default {
           newMsg: "hello",
         },
       ],
-      more: [
-        {
-          text: "发起群聊",
-          to: {
-            path: "",
-          },
-        },
-        {
-          text: "添加好友",
-          to: {
-            path: "",
-          },
-        },
-      ],
     };
   },
   methods: {
-    /**
-     * 测试用方法
-     */
-    addMsgCount() {
-      this.$store.commit("chatMessage/setNewMsgCount");
-
-      this.setNavigationBarTitle();
-    },
     /**
      * 设置顶部导航栏
      */
@@ -74,6 +52,14 @@ export default {
           index,
         });
       }
+    },
+    /**
+     * 跳转
+     */
+    toBVue(to) {
+      this.toPage("navigateTo", {
+        url: to.path,
+      });
     },
   },
   computed: {

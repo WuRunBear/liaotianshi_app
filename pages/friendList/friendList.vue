@@ -2,29 +2,36 @@
   <view>
     <!-- 其他 -->
     <view class="other">
-      <friend-item
+      <list-item
         :data="{
-          title: '新的好友',
+          name: '新的好友',
+          avatar: ''
         }"
+        simple
       />
 
-      <friend-item
+      <list-item
         :data="{
-          title: '群',
+          name: '群',
+          avatar: ''
         }"
+        simple
       />
     </view>
     <!-- 间隔槽 -->
-    <u-gap height="50" bg-color="#cfcfcf"></u-gap>
+    <u-gap height="30" bg-color="#cfcfcf"></u-gap>
     <!-- 好友列表 -->
     <view class="friend_list">
       <u-index-list :stick="false" :index-list="indexList">
         <view v-for="(item, index) in friendList" :key="index">
           <u-index-anchor :index="item.key" />
-          <friend-item
+          <list-item
             v-for="(child, i) in item.childs"
             :key="i"
             :data="child"
+            @click="toBVue"
+            height="110"
+            simple
           />
         </view>
       </u-index-list>
@@ -36,12 +43,8 @@
 </template>
 
 <script>
-import friendItem from "./components/friend-item.vue";
 export default {
   name: "friendList",
-  components: {
-    friendItem,
-  },
   data() {
     return {
       friendList: [
@@ -50,7 +53,8 @@ export default {
           childs: [
             {
               number: 1234567801,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -59,7 +63,8 @@ export default {
           childs: [
             {
               number: 1234567802,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -68,7 +73,8 @@ export default {
           childs: [
             {
               number: 1234567803,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -77,7 +83,8 @@ export default {
           childs: [
             {
               number: 1234567804,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -86,7 +93,8 @@ export default {
           childs: [
             {
               number: 1234567805,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -95,7 +103,8 @@ export default {
           childs: [
             {
               number: 1234567806,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -104,7 +113,8 @@ export default {
           childs: [
             {
               number: 1234567807,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -113,7 +123,8 @@ export default {
           childs: [
             {
               number: 1234567808,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -122,7 +133,8 @@ export default {
           childs: [
             {
               number: 1234567809,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -131,7 +143,8 @@ export default {
           childs: [
             {
               number: 1234567810,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -140,7 +153,8 @@ export default {
           childs: [
             {
               number: 1234567811,
-              title: "测试",
+              name: "测试",
+              avatar: ""
             },
           ],
         },
@@ -156,7 +170,22 @@ export default {
       return indexList;
     },
   },
-  methods: {},
+  methods: {
+    /**
+     * 跳转
+     */
+    toBVue(e) {
+      this.toPage("navigateTo", {
+        url: "/pages/userDetail/userDetail",
+        success: function() {
+          uni.$emit("userDetail", {
+            number: e.number,
+            userInfo: e,
+          });
+        },
+      });
+    },
+  },
   /**
    * 点击顶部右侧按钮
    */
